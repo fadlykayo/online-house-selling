@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Web API Auth</title>
+    <title>House Selling</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <link href="index.css" type="text/css" rel="stylesheet">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -10,7 +10,7 @@
   <body>
     <nav class="navbar">
       <div class="nav-wrapper">
-        <a href="/index.html" class="brand-logo">Web API Authentication</a>
+        <a href="/index.html" class="brand-logo">Online House Market</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="#">Lorem Ipsum</a></li>
           <li><a href="#">Lorem Ipsum</a></li>
@@ -19,45 +19,110 @@
       </div>
     </nav>
 
+
+    <div class="container" style="margin-bottom: 70px;">
+      <h3>House for Sale:</h3>
+      <br>
+      <form id="add-house" method="post">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="title" name="title_create" type="text" class="validate" placeholder="Title">
+            <label for="title">Title</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="specification" name="spec_create" type="text" class="validate" placeholder="Number of rooms, floors, size, etc">
+            <label for="last_name">Specification / Details</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="price" type="text" name="price_create" class="validate" placeholder="Price">
+            <label for="price">Price</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="location" name="location_create" type="text" class="validate" placeholder="Location">
+            <label for="location">Location</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="picture" name="picture_create" type="text" class="validate" placeholder="Picture">
+            <label for="picture">Picture</label>
+          </div>
+        </div>
+        <button class="btn" type="button">+ Add House</button>
+      </form>
+    </div>
+
     <div class="container">
-      <div class="row" style="margin-bottom: 10px;">
-        <h3 style="color: #006666; text-align:center;">Welcome onboard!</h3>
-      </div>
-      <div class="row">
-        <div class="col s12 m6 offset-m3 login-form" style="margin-top: 20px;">
-          <div class="card" style="background-color: hsl(148, 52%, 98%);">
-            <div class="card-content white-text">
-              <span class="card-title" style="color: #006666;">Sign In</span>
-              <p style="color: #006666;" id="error-message"></p>
-              <br>
-              <div class="row">
-                <form id="login-form" class="col s12" method="post">
-                  <div class="row">
-                    <div class="input-field col s12" style="color: #006666;">
-                      <input placeholder="Username" id="username" name="username" type="text" class="validate">
-                      <label for="username">Username</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12" style="color: #006666;">
-                      <input placeholder="Password" id="password" name="password" type="password" class="validate">
-                      <label for="password">Password</label>
-                    </div>
-                  </div>
-                  <button type="submit" class="btn teal darken-3">Login</button>
-                </form>
-              </div>
+      <div id="root">
+        <div class="col xs12">
+          <h2 class="header">Horizontal Card</h2>
+          <div class="card horizontal">
+            <div class="col xs6 card-image">
+              <img src="http://stuffpoint.com/nature/image/90518-nature-house-nature.jpg">
             </div>
-            <div class="card-action">
-              <a href="register.html"><span class="light-blue-text text-accent-2">Register</span></a>
+            <div class="col xs6 card-stacked">
+              <div class="card-content">
+                <p>I am a very simple card. I am good at containing small bits of information.</p>
+                <p>I am a very simple card. I am good at containing small bits of information.</p>
+                <p>I am a very simple card. I am good at containing small bits of information.</p>
+                <p>I am a very simple card. I am good at containing small bits of information.</p>
+                <p>I am a very simple card. I am good at containing small bits of information.</p>
+              </div>
+              <div class="card-action">
+                <button class="btn" type="button" onclick="">Edit</button>
+                <button class="btn" type="button" onclick="">Delete</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-    <script src="index.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.slider').slider();
+    });
+      var app = new Vue({
+        el: '#root',
+        data: {
+          title: '',
+          specification: '',
+          price: '',
+          location: '',
+          picture: '',
+
+        },
+        methods: {
+          loadTodo: function () {
+            this.todos = localStorage.getItem('todos').split(',')
+          },
+          addTodo: function () {
+            this.todos.push(this.newTodo)
+            this.updateLocal()
+          },
+          updateLocal: function () {
+            localStorage.setItem('todos', this.todos)
+          },
+          setIndex: function (idx) {
+            var indexTodo = this.todos.indexOf(idx)
+            this.index = indexTodo
+          },
+          deleteTodo: function (idx) {
+            this.setIndex(idx)
+            this.todos.splice(this.index, 1)
+            this.updateLocal()
+          }
+        }
+      })
+
+    </script>
   </body>
 </html>

@@ -1,10 +1,4 @@
-$(document).ready(function () {
-  getUsers()
-  let userName = localStorage.getItem('Username')
-  let userEmail = localStorage.getItem('UserEmail')
-  $('#nav-username').text('Username: ' + userName)
-  $('#nav-email').text('Email: ' + userEmail)
-})
+$(document).ready(function () {})
 
 $('#login-form').on('submit', (e) => {
   e.preventDefault()
