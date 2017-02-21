@@ -68,9 +68,9 @@
     <div id="root">
 
       <div id="header-for-sale" class="container" style="margin-bottom: 50px;">
-        <h4>House for sale:</h4>
+        <h4>House for Sale:</h4>
         <br>
-        <button data-target="modal1" class="btn" @click="GMAPS">+ Add House</button>
+        <button data-target="modal1" class="btn" @click="GMAPS">+ Add Post</button>
       </div>
 
       <div id="list-of-houses" class="container">
@@ -142,7 +142,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button class="btn modal-close" type="button" v-on:click="addHouse()">Sale House</button>
+          <button class="btn modal-close" type="button" v-on:click="addHouse()">Create Post</button>
           <button style="margin-right:15px;" class="btn modal-close" type="button">Close</button>
         </div>
       </div>
@@ -200,7 +200,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button class="btn modal-close" type="button" v-on:click="editHouse(edit._id)">Done Edit</button>
+          <button class="btn modal-close" type="button" v-on:click="editHouse(edit._id)">Save Changes</button>
           <button style="margin-right:15px;" class="btn modal-close" type="button">Close</button>
         </div>
       </div>
@@ -251,31 +251,31 @@
               lng: 106.84513
             });
 
-            // map.addControl({
-            //   position: 'top_right',
-            //   content: 'Geolocate',
-            //   style: {
-            //     margin: '5px',
-            //     padding: '1px 6px',
-            //     border: 'solid 1px #717B87',
-            //     background: '#fff'
-            //   },
-            //   events: {
-            //     click: function() {
-            //       GMaps.geolocate({
-            //         success: function(position) {
-            //           map.setCenter(position.coords.latitude, position.coords.longitude);
-            //         },
-            //         error: function(error) {
-            //           alert('Geolocation failed: '+error.message);
-            //         },
-            //         not_supported: function() {
-            //           alert("Your browser does not support geolocation");
-            //         }
-            //       });
-            //     }
-            //   }
-            // });
+            map.addControl({
+              position: 'top_right',
+              content: 'Geolocate',
+              style: {
+                margin: '5px',
+                padding: '1px 6px',
+                border: 'solid 1px #717B87',
+                background: '#fff'
+              },
+              events: {
+                click: function() {
+                  GMaps.geolocate({
+                    success: function(position) {
+                      map.setCenter(position.coords.latitude, position.coords.longitude);
+                    },
+                    error: function(error) {
+                      alert('Geolocation failed: '+error.message);
+                    },
+                    not_supported: function() {
+                      alert("Your browser does not support geolocation");
+                    }
+                  });
+                }
+              }
+            });
 
             GMaps.on('click', map.map, function(event) {
               app.add.latitude = event.latLng.lat();
@@ -353,43 +353,44 @@
           setTimeout(function() {
             let map2 = new GMaps({
               el: '#map2',
-              lat: -6.21462,
-              lng: 106.84513
+              lat: app.edit.latitude,
+              lng: app.edit.longitude
             });
 
-            // map.addControl({
-            //   position: 'top_right',
-            //   content: 'Geolocate',
-            //   style: {
-            //     margin: '5px',
-            //     padding: '1px 6px',
-            //     border: 'solid 1px #717B87',
-            //     background: '#fff'
-            //   },
-            //   events: {
-            //     click: function() {
-            //       GMaps.geolocate({
-            //         success: function(position) {
-            //           map.setCenter(position.coords.latitude, position.coords.longitude);
-            //         },
-            //         error: function(error) {
-            //           alert('Geolocation failed: '+error.message);
-            //         },
-            //         not_supported: function() {
-            //           alert("Your browser does not support geolocation");
-            //         }
-            //       });
-            //     }
-            //   }
-            // });
+            map2.addControl({
+              position: 'top_right',
+              content: 'Geolocate',
+              style: {
+                margin: '5px',
+                padding: '1px 6px',
+                border: 'solid 1px #717B87',
+                background: '#fff'
+              },
+              events: {
+                click: function() {
+                  GMaps.geolocate({
+                    success: function(position) {
+                      map2.setCenter(position.coords.latitude, position.coords.longitude);
+                    },
+                    error: function(error) {
+                      alert('Geolocation failed: '+error.message);
+                    },
+                    not_supported: function() {
+                      alert("Your browser does not support geolocation");
+                    }
+                  });
+                }
+              }
+            });
+
+            map2.addMarker({
+              lat: app.edit.latitude,
+              lng: app.edit.longitude
+            });
 
             GMaps.on('click', map2.map, function(event) {
               app.edit.latitude = event.latLng.lat();
               app.edit.longitude = event.latLng.lng();
-              console.log(app.edit.latitude);
-              console.log(app.edit.longitude);
-              console.log(app.add.latitude);
-              console.log(app.add.longitude);
               map2.removeMarkers()
               map2.addMarker({
                 lat: app.edit.latitude,

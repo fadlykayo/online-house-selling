@@ -7,7 +7,9 @@ module.exports = {
       specification: req.body.specification,
       price: req.body.price,
       location: req.body.location,
-      picture: req.body.picture
+      picture: req.body.picture,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
@@ -41,7 +43,9 @@ module.exports = {
       specification: req.body.specification,
       price: req.body.price,
       location: req.body.location,
-      picture: req.body.picture
+      picture: req.body.picture,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude
     }, {
       new: true
     }).then(function (data) {
