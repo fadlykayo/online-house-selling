@@ -2,23 +2,25 @@ const mongoose = require('mongoose')
 
 const HouseSchema = new mongoose.Schema({
   title: {
-    type: String,
-    required: true
+    type: String
   },
   specification: {
-    type: String,
-    required: true
+    type: String
   },
   price: {
-    type: String,
-    required: true
+    type: String
   },
   location: {
-    type: String,
-    required: true
+    type: String
   },
   picture: {
     type: String
+  },
+  latitude: {
+    type: Number
+  },
+  longitude: {
+    type: Number
   }
 },
   {

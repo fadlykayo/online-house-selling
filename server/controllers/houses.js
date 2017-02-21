@@ -25,7 +25,7 @@ module.exports = {
 
   getHouse: (req, res) => {
     Houses.findOne({
-      _id: req.body.id
+      _id: req.params.id
     }).then(function (data) {
       res.send(data)
     }).catch(function (err) {
