@@ -23,6 +23,16 @@ module.exports = {
     })
   },
 
+  getHouse: (req, res) => {
+    Houses.findOne({
+      _id: req.body.id
+    }).then(function (data) {
+      res.send(data)
+    }).catch(function (err) {
+      res.send(err)
+    })
+  },
+
   updateHouse: (req, res) => {
     Houses.findOneAndUpdate({
       _id: req.params.id
